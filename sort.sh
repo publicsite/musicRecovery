@@ -1,5 +1,8 @@
 #!/bin/sh
 
+OLD_UMASK="$(umask)"
+umask 0022
+
 if [ "$1" = "" ]; then
 echo "Arg 1: source dir"
 exit
@@ -79,3 +82,6 @@ done
 theuser="$(whoami)"
 
 sudo chown -R ${theuser}:${theuser} "${2}"
+
+umask "${OLD_UMASK}"
+
